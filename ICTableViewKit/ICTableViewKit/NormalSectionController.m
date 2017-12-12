@@ -12,27 +12,50 @@
 
 - (NSInteger)numberOfRows
 {
-    return 1;
+    return 16;
 }
-
 
 - (CGFloat)heightForRowAtIndex:(NSInteger)index
 {
     return 50;
 }
 
-
 - (__kindof UITableViewCell *)cellForRowAtIndex:(NSInteger)index
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"cell"];
-    
+    UITableViewCell *cell = [self.tableViewContext dequeueReusableCellOfClass:[UITableViewCell class] forSectionController:self atIndex:index];
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld",index];
     return cell;
 }
 
+- (CGFloat)heightForFooter {
+    return 40;
+}
 
-- (void)didUpdateToObject:(id)object {}
+- (CGFloat)heightForHeader {
+    return 80;
+}
 
+- (UIView *)sectionHeaderView {
+    UIView *view = [self.tableViewContext dequeueReusableHeaderFooterViewWithNibName:@"ICHeaderFooterView" forSectionController:self];
+    return view;
+}
 
-- (void)didSelectItemAtIndex:(NSInteger)index {}
+- (UIView *)sectionFooterView {
+    UIView *view = [self.tableViewContext dequeueReusableHeaderFooterViewWithNibName:@"ICHeaderFooterView" forSectionController:self];
+    return view;
+}
+
+- (void)didUpdateToObject:(id)object {
+    
+    
+    
+}
+
+- (void)didSelectItemAtIndex:(NSInteger)index {
+    
+    NSLog(@"%ld",index);
+    [self.viewController.navigationController pushViewController:[UIViewController new] animated:YES];
+    
+}
 
 @end

@@ -62,6 +62,11 @@
     return [self.objectToSectionControllerMap objectForKey:object];
 }
 
+- (NSInteger)sectionForSectionController:(ICTableViewSectionController *)sectionController {
+    NSNumber *index = [self.sectionControllerToSectionMap objectForKey:sectionController];
+    return index != nil ? [index integerValue] : NSNotFound;
+}
+
 - (void)updateWithObjects:(NSArray *)objects sectionControllers:(NSArray *)sectionControllers {
     
     self.mObjects = [objects mutableCopy];

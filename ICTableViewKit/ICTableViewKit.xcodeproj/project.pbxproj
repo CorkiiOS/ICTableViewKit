@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04B4DEC51FD7CCE100E9144B /* ICHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4DEC41FD7CCE100E9144B /* ICHeaderFooterView.m */; };
+		04B4DEC71FD7CCF300E9144B /* ICHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4DEC61FD7CCF300E9144B /* ICHeaderFooterView.xib */; };
 		48D7EDA31FD6C9B0008BC2D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7EDA21FD6C9B0008BC2D8 /* AppDelegate.m */; };
 		48D7EDA61FD6C9B0008BC2D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7EDA51FD6C9B0008BC2D8 /* ViewController.m */; };
 		48D7EDA91FD6C9B0008BC2D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D7EDA71FD6C9B0008BC2D8 /* Main.storyboard */; };
@@ -40,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04B4DEC21FD7BD3D00E9144B /* ICTableViewContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewContext.h; sourceTree = "<group>"; };
+		04B4DEC31FD7CCE100E9144B /* ICHeaderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICHeaderFooterView.h; sourceTree = "<group>"; };
+		04B4DEC41FD7CCE100E9144B /* ICHeaderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICHeaderFooterView.m; sourceTree = "<group>"; };
+		04B4DEC61FD7CCF300E9144B /* ICHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ICHeaderFooterView.xib; sourceTree = "<group>"; };
 		48D7ED9E1FD6C9B0008BC2D8 /* ICTableViewKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ICTableViewKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D7EDA11FD6C9B0008BC2D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		48D7EDA21FD6C9B0008BC2D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -123,6 +129,9 @@
 				48D7EDA51FD6C9B0008BC2D8 /* ViewController.m */,
 				48D7EDE11FD6D2E5008BC2D8 /* NormalSectionController.h */,
 				48D7EDE21FD6D2E5008BC2D8 /* NormalSectionController.m */,
+				04B4DEC31FD7CCE100E9144B /* ICHeaderFooterView.h */,
+				04B4DEC41FD7CCE100E9144B /* ICHeaderFooterView.m */,
+				04B4DEC61FD7CCF300E9144B /* ICHeaderFooterView.xib */,
 				48D7EDE01FD6D2AE008BC2D8 /* ICTableViewKit */,
 				48D7EDA71FD6C9B0008BC2D8 /* Main.storyboard */,
 				48D7EDAA1FD6C9B0008BC2D8 /* Assets.xcassets */,
@@ -156,6 +165,7 @@
 			children = (
 				48D7EDD31FD6C9D3008BC2D8 /* ICTableViewAdapter.h */,
 				48D7EDD41FD6C9D3008BC2D8 /* ICTableViewAdapter.m */,
+				04B4DEC21FD7BD3D00E9144B /* ICTableViewContext.h */,
 				48D7EDDF1FD6CF46008BC2D8 /* ICTableViewAdapterDataSource.h */,
 				48D7EDD61FD6CA59008BC2D8 /* ICTableViewAdapter+UITableView.h */,
 				48D7EDD71FD6CA59008BC2D8 /* ICTableViewAdapter+UITableView.m */,
@@ -275,6 +285,7 @@
 			files = (
 				48D7EDAE1FD6C9B0008BC2D8 /* LaunchScreen.storyboard in Resources */,
 				48D7EDAB1FD6C9B0008BC2D8 /* Assets.xcassets in Resources */,
+				04B4DEC71FD7CCF300E9144B /* ICHeaderFooterView.xib in Resources */,
 				48D7EDA91FD6C9B0008BC2D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +319,7 @@
 				48D7EDA31FD6C9B0008BC2D8 /* AppDelegate.m in Sources */,
 				48D7EDE31FD6D2E5008BC2D8 /* NormalSectionController.m in Sources */,
 				48D7EDD51FD6C9D3008BC2D8 /* ICTableViewAdapter.m in Sources */,
+				04B4DEC51FD7CCE100E9144B /* ICHeaderFooterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

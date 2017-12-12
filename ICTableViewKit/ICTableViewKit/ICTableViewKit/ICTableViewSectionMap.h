@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable ICTableViewSectionController *)sectionControllerForSection:(NSInteger)section;
 
+- (NSInteger)sectionForSectionController:(ICTableViewSectionController *)sectionController;
+
+
 - (nullable ICTableViewSectionController *)sectionControllerForObject:(id)object;
 
 /**

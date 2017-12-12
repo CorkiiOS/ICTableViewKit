@@ -19,13 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    UITableView *tv = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStyleGrouped)];
+    UITableView *tv = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     [self.view addSubview:tv];
     
     self.adapter.tableView = tv;
     self.adapter.dataSource = self;
-    
-    
 }
 
 - (ICTableViewAdapter *)adapter {
@@ -47,9 +45,7 @@
 
 - (nonnull NSArray *)objectsForListAdapter:(nonnull ICTableViewAdapter *)listAdapter
 {
-    return @[@1, @2, @3];
+    return @[@1];
 }
-
-
 
 @end
