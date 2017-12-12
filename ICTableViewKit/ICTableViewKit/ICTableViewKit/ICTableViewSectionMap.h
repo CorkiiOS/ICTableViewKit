@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithMapTable:(NSMapTable *)mapTable NS_DESIGNATED_INITIALIZER;
 
-
 /**
  The objects stored in the map.
  */
@@ -23,18 +22,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateWithObjects:(NSArray *)objects sectionControllers:(NSArray *)sectionControllers;
 
+- (nullable id)objectForSection:(NSInteger)section;
+
 - (nullable ICTableViewSectionController *)sectionControllerForSection:(NSInteger)section;
+
+- (NSInteger)sectionForSectionController:(ICTableViewSectionController *)sectionController;
+
 
 - (nullable ICTableViewSectionController *)sectionControllerForObject:(id)object;
 
-/**
- :nodoc:
- */
+- (void)reset;
+
 - (instancetype)init NS_UNAVAILABLE;
 
-/**
- :nodoc:
- */
 + (instancetype)new NS_UNAVAILABLE;
 
 @end
