@@ -47,8 +47,7 @@
 
 - (void)didUpdateToObject:(id)object {
     
-    
-    
+    NSLog(@"%@", object);
 }
 
 - (void)didSelectItemAtIndex:(NSInteger)index {

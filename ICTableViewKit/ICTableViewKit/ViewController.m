@@ -21,7 +21,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     UITableView *tv = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     [self.view addSubview:tv];
-    
     self.adapter.tableView = tv;
     self.adapter.dataSource = self;
 }

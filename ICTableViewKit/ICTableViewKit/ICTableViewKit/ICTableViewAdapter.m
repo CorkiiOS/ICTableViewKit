@@ -27,6 +27,17 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
 
  @implementation ICTableViewAdapter
 
+- (void)dealloc {
+    // on iOS 9 setting the dataSource has side effects that can invalidate the layout and seg fault
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 9.0) {
+        // properties are assign for <iOS 9
+        _tableView.dataSource = nil;
+        _tableView.delegate = nil;
+    }
+    
+    [self.sectionMap reset];
+}
+
 - (instancetype)initViewController:(UIViewController *)viewController
 {
     if (self = [super init]) {
@@ -36,11 +47,6 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
         NSMapTable *table = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory capacity:0];
         _sectionMap = [[ICTableViewSectionMap alloc] initWithMapTable:table];
         _viewController = viewController;
-        
-        _registerCellClasses = [NSMutableSet set];
-        _registerNibNames = [NSMutableSet set];
-        _registerHeaderFooterViewClasses = [NSMutableSet set];
-        _registerHeaderFooterViewNibNames = [NSMutableSet set];
     }
     return self;
 }
@@ -56,7 +62,7 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
 
     NSMutableArray<ICTableViewSectionController *> *sectionControllers = [NSMutableArray new];
     NSMutableArray *validObjects = [NSMutableArray new];
-    
+    NSMutableArray *updatedObjects = [NSMutableArray new];
     for (id object in objects) {
         
         // infra checks to see if a controller exists
@@ -65,8 +71,6 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
         // if not, query the data source for a new one
         if (sectionController == nil) {
             sectionController = [dataSource listAdapter:self sectionControllerForObject:object];
-            sectionController.tableViewContext = self;
-            sectionController.viewController = self.viewController;
         }
         
         if (sectionController == nil) {
@@ -75,6 +79,9 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
             continue;
         }
         
+        sectionController.tableViewContext = self;
+        sectionController.viewController = self.viewController;
+        
         [sectionControllers addObject:sectionController];
         [validObjects addObject:object];
         
@@ -82,21 +89,39 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
 //        sectionController.collectionContext = self;
 //        sectionController.viewController = self.viewController;
         
-        // check if the item has changed instances or is new
-//        const NSInteger oldSection = [map sectionForObject:object];
-//        if (oldSection == NSNotFound || [map objectForSection:oldSection] != object) {
-//            [updatedObjects addObject:object];
-//        }
+         //check if the item has changed instances or is new
+        const NSInteger oldSection = [map sectionForSectionController:object];
+        if (oldSection == NSNotFound || [map objectForSection:oldSection] != object) {
+            [updatedObjects addObject:object];
+        }
         
-        //[sectionControllers addObject:sectionController];
+        [sectionControllers addObject:sectionController];
         
-//#if DEBUG
+#if DEBUG
 //        IGAssert([NSSet setWithArray:sectionControllers].count == sectionControllers.count,
 //                 @"Section controllers array is not filled with unique objects; section controllers are being reused");
-//#endif
-        //[validObjects addObject:object];
+#endif
+        [validObjects addObject:object];
     }
     [map updateWithObjects:validObjects sectionControllers:sectionControllers];
+    
+    for (id object in updatedObjects) {
+        [[map sectionControllerForObject:object] didUpdateToObject:object];
+    }
+    
+    NSInteger itemCount = 0;
+    for (ICTableViewSectionController *sectionController in sectionControllers) {
+        itemCount += [sectionController numberOfRows];
+    }
+    [self updateBackgroundViewShouldHide:itemCount > 0];
+
+}
+
+- (void)updateAfterPublicSettingsChange {
+    id<ICTableViewAdapterDataSource> dataSource = _dataSource;
+    if (_tableView != nil && dataSource != nil) {
+        [self updateObjects:[dataSource objectsForListAdapter:self] dataSource:dataSource];
+    }
 }
 
 - (NSIndexPath *)indexPathForSectionController:(ICTableViewSectionController *)controller
@@ -110,17 +135,34 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
     }
 }
 
-- (void)setDataSource:(id<ICTableViewAdapterDataSource>)dataSource
-{
-    _dataSource = dataSource;
-    [self updateObjects:[self.dataSource objectsForListAdapter:self] dataSource:dataSource];
+- (void)updateBackgroundViewShouldHide:(BOOL)shouldHide {
+    //加载数据首次不执行
+    UIView *backgroundView = [self.dataSource emptyViewForListAdapter:self];
+    // don't do anything if the client is using the same view
+    if (backgroundView != _tableView.backgroundView) {
+        // one first. also fine if it is nil
+        [_tableView.backgroundView removeFromSuperview];
+        _tableView.backgroundView = backgroundView;
+    }
+    _tableView.backgroundView.hidden = shouldHide;
 }
 
-- (void)setTableView:(UITableView *)tableView
-{
-    _tableView = tableView;
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
+- (void)setDataSource:(id<ICTableViewAdapterDataSource>)dataSource {
+    _dataSource = dataSource;
+    [self updateAfterPublicSettingsChange];
+}
+
+- (void)setTableView:(UITableView *)tableView {
+    if (_tableView != tableView || _tableView.dataSource != self) {
+        _tableView = tableView;
+        _registerCellClasses = [NSMutableSet set];
+        _registerNibNames = [NSMutableSet set];
+        _registerHeaderFooterViewClasses = [NSMutableSet set];
+        _registerHeaderFooterViewNibNames = [NSMutableSet set];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        [self updateAfterPublicSettingsChange];
+    }
 }
 
 - (nullable __kindof UITableViewCell *)cellForRowAtIndex:(NSInteger)index sectionController:(ICTableViewSectionController *)sectionController {

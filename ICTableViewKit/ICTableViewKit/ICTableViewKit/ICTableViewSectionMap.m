@@ -69,6 +69,8 @@
 
 - (void)updateWithObjects:(NSArray *)objects sectionControllers:(NSArray *)sectionControllers {
     
+    [self reset];
+    
     self.mObjects = [objects mutableCopy];
 
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
@@ -77,8 +79,11 @@
         // set the index of the list for easy reverse lookup
         [self.sectionControllerToSectionMap setObject:@(idx) forKey:sectionController];
         [self.objectToSectionControllerMap setObject:sectionController forKey:object];
-        [self.objectToSectionControllerMap setObject:sectionController forKey:object];
     }];
 }
 
+- (void)reset {
+    [self.sectionControllerToSectionMap removeAllObjects];
+    [self.objectToSectionControllerMap removeAllObjects];
+}
 @end

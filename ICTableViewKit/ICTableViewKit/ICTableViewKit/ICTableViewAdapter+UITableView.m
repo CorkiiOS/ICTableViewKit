@@ -33,7 +33,6 @@
     return height;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ICTableViewSectionController *sectionController = [self sectionControllerForSection:indexPath.section];
     [sectionController didSelectItemAtIndex:indexPath.row];
@@ -54,4 +53,5 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     return [[self.sectionMap sectionControllerForSection:section] sectionFooterView];
 }
+
 @end
