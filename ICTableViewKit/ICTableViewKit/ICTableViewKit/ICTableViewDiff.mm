@@ -54,7 +54,8 @@ static id ICTableViewDiffing(BOOL returnIndexPaths,
                              NSInteger fromSction,
                              NSInteger toSection,
                              NSArray<id<ICTableViewDiffable>> *_Nullable oldArray,
-                             NSArray<id<ICTableViewDiffable>> * _Nullable newArray) {
+                             NSArray<id<ICTableViewDiffable>> * _Nullable newArray,
+                             ICTableViewDiffOption option) {
     const NSInteger oldCount = oldArray.count;
     const NSInteger newCount = newArray.count;
 
@@ -68,6 +69,7 @@ static id ICTableViewDiffing(BOOL returnIndexPaths,
         entry.oldIndexs.push(NSNotFound);
         entry.newCounter ++;
         newResultArray[i].entry = &entry;
+
     }
 
     vector<ICTableViewRecord> oldResultArray(oldCount);
@@ -83,7 +85,32 @@ static id ICTableViewDiffing(BOOL returnIndexPaths,
     for (NSInteger i = 0; i < newCount; i ++) {
         ICTableViewEntry *entry = newResultArray[i].entry;
         const NSInteger originalIndex = entry->oldIndexs.top();
-
+        entry->oldIndexs.pop();
+        
+        if (originalIndex < oldCount) {
+            const id<ICTableViewDiffable> n = newArray[i];
+            const id<ICTableViewDiffable> o = oldArray[originalIndex];
+            
+            switch (option) {
+                case ICTableViewDiffPointerPersonality:
+                {
+                    if (n != o) {
+                        entry->updated = YES;
+                    }
+                }
+                    break;
+                    
+                case ICTableViewDiffEquality:
+                {
+                    if (n != o && ![n isEqualToDiffableObject:o]) {
+                        entry->updated = YES;
+                    }
+                }
+                    break;
+            }
+           
+        }
+        
         if (originalIndex != NSNotFound &&
             entry->newCounter > 0 &&
             entry->oldCounter > 0) {
@@ -169,8 +196,9 @@ static id ICTableViewDiffing(BOOL returnIndexPaths,
 
 ICTableViewIndexSetResult *ICTableViewDiffExperiment(
                                                      NSArray<id<ICTableViewDiffable>> *_Nullable oldArraty,
-                                                     NSArray<id<ICTableViewDiffable>> * _Nullable newArray) {
-    return ICTableViewDiffing(NO, 0, 0, oldArraty, newArray);
+                                                     NSArray<id<ICTableViewDiffable>> * _Nullable newArray,
+                                                     ICTableViewDiffOption option) {
+    return ICTableViewDiffing(NO, 0, 0, oldArraty, newArray, option);
 
 }
 

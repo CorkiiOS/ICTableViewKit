@@ -23,4 +23,13 @@
     return self;
 }
 
+- (BOOL)hasChanges {
+    return self.changeCount > 0;
+}
+
+- (NSInteger)changeCount {
+    return self.inserts.count + self.deletes.count + self.updates.count;
+}
+
+
 @end

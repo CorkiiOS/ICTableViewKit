@@ -26,13 +26,69 @@
     self.fromObjects = fromObjects;
     self.toObjects = toObjects;
     
+    //执行更新
+    void (^executeUpdateBlocks)(void) = ^{
+        
+    };
+    
+    //批量执行完成block
+    void (^excuteCompletionBlocks)(BOOL) = ^(BOOL finished) {
+        
+    };
+    
+    //刷新数据回退
+    void (^reloadDataFallback)(void) = ^{
+        [tableView reloadData];
+        [tableView layoutIfNeeded];
+        excuteCompletionBlocks(YES);
+    };
+    
     ICTableViewIndexSetResult *(^performDiff)(void) = ^ICTableViewIndexSetResult * {
         return ICTableViewDiffExperiment(fromObjects, toObjects);
+    };
+    
+    //批量更新操作
+    void (^batchUpdatesBlock)(ICTableViewIndexSetResult *result) = ^(ICTableViewIndexSetResult *result){
+        executeUpdateBlocks();
+        
+       
+    };
+
+    
+    //批量更新完成
+    void (^batchUpdatesCompletionBlock)(BOOL) = ^(BOOL finished) {
+        
+     
     };
     
     // block that executes the batch update and exception handling
     void (^performUpdate)(ICTableViewIndexSetResult *) = ^(ICTableViewIndexSetResult *result) {
         
+        @try {
+            //将要执行更新操作
+            //改变的数量过大 执行回退操作 少条件
+            if (result.changeCount > 100) {
+                reloadDataFallback();
+            }else if (animated) {
+                [tableView performBatchUpdates:^{
+                    
+                } completion:batchUpdatesCompletionBlock];
+            }else {
+                [CATransaction begin];
+                [CATransaction setDisableActions:YES];
+                [tableView performBatchUpdates:^{
+                    batchUpdatesBlock(result);
+                } completion:^(BOOL finished) {
+                    batchUpdatesCompletionBlock(finished);
+                }];
+                
+            }
+            
+        }@catch (NSException *exception){
+            //更新操作执行产生异常
+            @throw exception;
+        }
+       
     };
 
     ICTableViewIndexSetResult *result = performDiff();

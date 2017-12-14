@@ -23,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) NSIndexSet *updates;
 
+@property (nonatomic, assign, readonly) BOOL hasChange;
+
+@property (nonatomic, assign, readonly) NSInteger changeCount;
+
+
+
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)new NS_UNAVAILABLE;
 

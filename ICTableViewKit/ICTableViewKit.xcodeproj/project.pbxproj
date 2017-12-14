@@ -25,6 +25,10 @@
 		48D7EDDB1FD6CB32008BC2D8 /* ICTableViewSectionMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7EDDA1FD6CB32008BC2D8 /* ICTableViewSectionMap.m */; };
 		48D7EDDE1FD6CE1C008BC2D8 /* ICTableViewSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7EDDD1FD6CE1C008BC2D8 /* ICTableViewSectionController.m */; };
 		48D7EDE31FD6D2E5008BC2D8 /* NormalSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7EDE21FD6D2E5008BC2D8 /* NormalSectionController.m */; };
+		48EB92F11FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB92F01FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.m */; };
+		48EB92F41FE29E89006ADD1A /* NSString+ICTableViewDiffable.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB92F31FE29E89006ADD1A /* NSString+ICTableViewDiffable.m */; };
+		48EB92F61FE2A372006ADD1A /* ICTableViewDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB92F51FE2A372006ADD1A /* ICTableViewDiff.m */; };
+		48EB92FE1FE2B8D6006ADD1A /* ICTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB92FD1FE2B8D6006ADD1A /* ICTestObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +88,13 @@
 		48D7EDDF1FD6CF46008BC2D8 /* ICTableViewAdapterDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewAdapterDataSource.h; sourceTree = "<group>"; };
 		48D7EDE11FD6D2E5008BC2D8 /* NormalSectionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NormalSectionController.h; sourceTree = "<group>"; };
 		48D7EDE21FD6D2E5008BC2D8 /* NormalSectionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NormalSectionController.m; sourceTree = "<group>"; };
+		48EB92EF1FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ICTableViewDiffable.h"; sourceTree = "<group>"; };
+		48EB92F01FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ICTableViewDiffable.m"; sourceTree = "<group>"; };
+		48EB92F21FE29E89006ADD1A /* NSString+ICTableViewDiffable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+ICTableViewDiffable.h"; sourceTree = "<group>"; };
+		48EB92F31FE29E89006ADD1A /* NSString+ICTableViewDiffable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+ICTableViewDiffable.m"; sourceTree = "<group>"; };
+		48EB92F51FE2A372006ADD1A /* ICTableViewDiff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTableViewDiff.m; sourceTree = "<group>"; };
+		48EB92FC1FE2B8D6006ADD1A /* ICTestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTestObject.h; sourceTree = "<group>"; };
+		48EB92FD1FE2B8D6006ADD1A /* ICTestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTestObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				48D7EDBA1FD6C9B1008BC2D8 /* ICTableViewKitTests.m */,
+				48EB92F51FE2A372006ADD1A /* ICTableViewDiff.m */,
+				48EB92FC1FE2B8D6006ADD1A /* ICTestObject.h */,
+				48EB92FD1FE2B8D6006ADD1A /* ICTestObject.m */,
 				48D7EDBC1FD6C9B1008BC2D8 /* Info.plist */,
 			);
 			path = ICTableViewKitTests;
@@ -192,6 +206,10 @@
 				04D67F491FE2293900A46DBF /* ICTableViewIndexSetResult.m */,
 				04D67F4B1FE22B9C00A46DBF /* ICTableViewDiff.h */,
 				04D67F4C1FE22B9C00A46DBF /* ICTableViewDiff.mm */,
+				48EB92EF1FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.h */,
+				48EB92F01FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.m */,
+				48EB92F21FE29E89006ADD1A /* NSString+ICTableViewDiffable.h */,
+				48EB92F31FE29E89006ADD1A /* NSString+ICTableViewDiffable.m */,
 			);
 			path = ICTableViewKit;
 			sourceTree = "<group>";
@@ -340,6 +358,8 @@
 				04D67F4A1FE2293900A46DBF /* ICTableViewIndexSetResult.m in Sources */,
 				48D7EDA31FD6C9B0008BC2D8 /* AppDelegate.m in Sources */,
 				48D7EDE31FD6D2E5008BC2D8 /* NormalSectionController.m in Sources */,
+				48EB92F41FE29E89006ADD1A /* NSString+ICTableViewDiffable.m in Sources */,
+				48EB92F11FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.m in Sources */,
 				48D7EDD51FD6C9D3008BC2D8 /* ICTableViewAdapter.m in Sources */,
 				04B4DEC51FD7CCE100E9144B /* ICHeaderFooterView.m in Sources */,
 			);
@@ -349,7 +369,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48EB92F61FE2A372006ADD1A /* ICTableViewDiff.m in Sources */,
 				48D7EDBB1FD6C9B1008BC2D8 /* ICTableViewKitTests.m in Sources */,
+				48EB92FE1FE2B8D6006ADD1A /* ICTestObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
