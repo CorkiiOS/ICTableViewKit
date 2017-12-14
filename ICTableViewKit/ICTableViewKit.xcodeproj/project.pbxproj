@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		04B4DEC51FD7CCE100E9144B /* ICHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4DEC41FD7CCE100E9144B /* ICHeaderFooterView.m */; };
 		04B4DEC71FD7CCF300E9144B /* ICHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4DEC61FD7CCF300E9144B /* ICHeaderFooterView.xib */; };
+		04D67F451FE21B5800A46DBF /* ICTableViewUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D67F441FE21B5800A46DBF /* ICTableViewUpdater.m */; };
+		04D67F4A1FE2293900A46DBF /* ICTableViewIndexSetResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D67F491FE2293900A46DBF /* ICTableViewIndexSetResult.m */; };
+		04D67F4D1FE22B9C00A46DBF /* ICTableViewDiff.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D67F4C1FE22B9C00A46DBF /* ICTableViewDiff.mm */; };
 		48D7EDA31FD6C9B0008BC2D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7EDA21FD6C9B0008BC2D8 /* AppDelegate.m */; };
 		48D7EDA61FD6C9B0008BC2D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D7EDA51FD6C9B0008BC2D8 /* ViewController.m */; };
 		48D7EDA91FD6C9B0008BC2D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D7EDA71FD6C9B0008BC2D8 /* Main.storyboard */; };
@@ -46,6 +49,14 @@
 		04B4DEC31FD7CCE100E9144B /* ICHeaderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICHeaderFooterView.h; sourceTree = "<group>"; };
 		04B4DEC41FD7CCE100E9144B /* ICHeaderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICHeaderFooterView.m; sourceTree = "<group>"; };
 		04B4DEC61FD7CCF300E9144B /* ICHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ICHeaderFooterView.xib; sourceTree = "<group>"; };
+		04D67F431FE21B5800A46DBF /* ICTableViewUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewUpdater.h; sourceTree = "<group>"; };
+		04D67F441FE21B5800A46DBF /* ICTableViewUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTableViewUpdater.m; sourceTree = "<group>"; };
+		04D67F461FE21C2A00A46DBF /* ICTableViewUpdatingDelagate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewUpdatingDelagate.h; sourceTree = "<group>"; };
+		04D67F471FE21F0C00A46DBF /* ICTableViewDiffable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewDiffable.h; sourceTree = "<group>"; };
+		04D67F481FE2293900A46DBF /* ICTableViewIndexSetResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewIndexSetResult.h; sourceTree = "<group>"; };
+		04D67F491FE2293900A46DBF /* ICTableViewIndexSetResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTableViewIndexSetResult.m; sourceTree = "<group>"; };
+		04D67F4B1FE22B9C00A46DBF /* ICTableViewDiff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewDiff.h; sourceTree = "<group>"; };
+		04D67F4C1FE22B9C00A46DBF /* ICTableViewDiff.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ICTableViewDiff.mm; sourceTree = "<group>"; };
 		48D7ED9E1FD6C9B0008BC2D8 /* ICTableViewKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ICTableViewKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D7EDA11FD6C9B0008BC2D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		48D7EDA21FD6C9B0008BC2D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -173,6 +184,14 @@
 				48D7EDDA1FD6CB32008BC2D8 /* ICTableViewSectionMap.m */,
 				48D7EDDC1FD6CE1C008BC2D8 /* ICTableViewSectionController.h */,
 				48D7EDDD1FD6CE1C008BC2D8 /* ICTableViewSectionController.m */,
+				04D67F461FE21C2A00A46DBF /* ICTableViewUpdatingDelagate.h */,
+				04D67F471FE21F0C00A46DBF /* ICTableViewDiffable.h */,
+				04D67F431FE21B5800A46DBF /* ICTableViewUpdater.h */,
+				04D67F441FE21B5800A46DBF /* ICTableViewUpdater.m */,
+				04D67F481FE2293900A46DBF /* ICTableViewIndexSetResult.h */,
+				04D67F491FE2293900A46DBF /* ICTableViewIndexSetResult.m */,
+				04D67F4B1FE22B9C00A46DBF /* ICTableViewDiff.h */,
+				04D67F4C1FE22B9C00A46DBF /* ICTableViewDiff.mm */,
 			);
 			path = ICTableViewKit;
 			sourceTree = "<group>";
@@ -314,8 +333,11 @@
 				48D7EDD81FD6CA59008BC2D8 /* ICTableViewAdapter+UITableView.m in Sources */,
 				48D7EDA61FD6C9B0008BC2D8 /* ViewController.m in Sources */,
 				48D7EDDB1FD6CB32008BC2D8 /* ICTableViewSectionMap.m in Sources */,
+				04D67F451FE21B5800A46DBF /* ICTableViewUpdater.m in Sources */,
+				04D67F4D1FE22B9C00A46DBF /* ICTableViewDiff.mm in Sources */,
 				48D7EDDE1FD6CE1C008BC2D8 /* ICTableViewSectionController.m in Sources */,
 				48D7EDB11FD6C9B0008BC2D8 /* main.m in Sources */,
+				04D67F4A1FE2293900A46DBF /* ICTableViewIndexSetResult.m in Sources */,
 				48D7EDA31FD6C9B0008BC2D8 /* AppDelegate.m in Sources */,
 				48D7EDE31FD6D2E5008BC2D8 /* NormalSectionController.m in Sources */,
 				48D7EDD51FD6C9D3008BC2D8 /* ICTableViewAdapter.m in Sources */,
@@ -485,6 +507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K726HQ828M;
 				INFOPLIST_FILE = ICTableViewKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iCorki.www.ICTableViewKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -499,6 +522,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K726HQ828M;
 				INFOPLIST_FILE = ICTableViewKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iCorki.www.ICTableViewKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

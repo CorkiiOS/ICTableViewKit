@@ -11,6 +11,7 @@
 #import "ICTableViewSectionMap.h"
 #import "ICTableViewContext.h"
 #import "ICTableViewSectionController.h"
+#import "ICTableViewUpdatingDelagate.h"
 
 NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString * _Nullable nibName) {
     return [NSString stringWithFormat:@"%@%@", nibName ?: @"", NSStringFromClass(viewClass)];
@@ -22,6 +23,8 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
 @property (nonatomic, strong) NSMutableSet *registerNibNames;
 @property (nonatomic, strong) NSMutableSet *registerHeaderFooterViewClasses;
 @property (nonatomic, strong) NSMutableSet *registerHeaderFooterViewNibNames;
+
+@property (nonatomic, strong) id<ICTableViewUpdatingDelagate> updater;
 
 @end
 
@@ -38,7 +41,7 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
     [self.sectionMap reset];
 }
 
-- (instancetype)initViewController:(UIViewController *)viewController
+- (instancetype)initWithUpdater:(id<ICTableViewUpdatingDelagate>)updater viewController:(UIViewController *)viewController
 {
     if (self = [super init]) {
         
@@ -163,6 +166,21 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
         _tableView.delegate = self;
         [self updateAfterPublicSettingsChange];
     }
+}
+
+- (void)performUpdatesAnimated:(BOOL)animated completion:(IGTableViewUpdaterCompletion)completion {
+    id<ICTableViewAdapterDataSource> dataSource = self.dataSource;
+    
+    NSArray *fromObjects = self.sectionMap.objects;
+    NSArray *toObjects = [dataSource objectsForListAdapter:self];
+    [self.updater performUpdateWithTableView:self.tableView
+                                 fromObjects:fromObjects
+                                   toObjects:toObjects
+                                    animated:animated
+                                  completion:^(BOOL finished) {
+        
+    }];
+    
 }
 
 - (nullable __kindof UITableViewCell *)cellForRowAtIndex:(NSInteger)index sectionController:(ICTableViewSectionController *)sectionController {

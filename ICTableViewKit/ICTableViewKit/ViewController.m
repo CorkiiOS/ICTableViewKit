@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ICTableViewAdapter.h"
 #import "NormalSectionController.h"
+#import "ICTableViewUpdater.h"
 @interface ViewController ()<ICTableViewAdapterDataSource>
 @property (nonatomic, strong) ICTableViewAdapter *adapter;
 
@@ -27,7 +28,7 @@
 
 - (ICTableViewAdapter *)adapter {
     if (_adapter == nil) {
-        _adapter = [[ICTableViewAdapter alloc] initViewController:self];
+        _adapter = [[ICTableViewAdapter alloc] initWithUpdater:[ICTableViewUpdater new] viewController:self];
     }
     return _adapter;
 }

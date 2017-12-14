@@ -9,17 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "ICTableViewAdapterDataSource.h"
+#import "ICTableViewUpdatingDelagate.h"
 NS_ASSUME_NONNULL_BEGIN
 
 
 @class ICTableViewSectionMap, ICTableViewSectionController;
+@protocol ICTableViewUpdatingDelagate;
 
+typedef void (^IGTableViewUpdaterCompletion)(BOOL finished);
 
 @interface ICTableViewAdapter : NSObject
 
 
-- (instancetype)initViewController:(UIViewController *)viewController;
-
+- (instancetype)initWithUpdater:(id<ICTableViewUpdatingDelagate>)updater viewController:(UIViewController *)viewController;
 
 
 @property (nonatomic, nullable, weak) id <ICTableViewAdapterDataSource> dataSource;
@@ -33,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (nullable ICTableViewSectionController *)sectionControllerForSection:(NSInteger)section;
+
+- (void)performUpdatesAnimated:(BOOL)animated completion:(nullable IGTableViewUpdaterCompletion)completion;
+
 
 @end
 
