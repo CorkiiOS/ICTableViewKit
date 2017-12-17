@@ -171,15 +171,23 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
 - (void)performUpdatesAnimated:(BOOL)animated completion:(IGTableViewUpdaterCompletion)completion {
     id<ICTableViewAdapterDataSource> dataSource = self.dataSource;
     
+    __weak typeof(self) weakSelf = self;
+    
     NSArray *fromObjects = self.sectionMap.objects;
     NSArray *toObjects = [dataSource objectsForListAdapter:self];
     [self.updater performUpdateWithTableView:self.tableView
                                  fromObjects:fromObjects
                                    toObjects:toObjects
                                     animated:animated
+                       objectTransitionBlock:^(NSArray * _Nonnull toObjects) {
+                                 
+                                 [weakSelf updateObjects:toObjects dataSource:dataSource];
+                           
+                       }
                                   completion:^(BOOL finished) {
         
-    }];
+   
+                                  }];
     
 }
 

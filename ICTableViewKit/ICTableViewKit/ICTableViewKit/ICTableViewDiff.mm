@@ -194,13 +194,40 @@ static id ICTableViewDiffing(BOOL returnIndexPaths,
     }
 }
 
-ICTableViewIndexSetResult *ICTableViewDiffExperiment(
-                                                     NSArray<id<ICTableViewDiffable>> *_Nullable oldArraty,
+
+ICTableViewIndexSetResult *ICTableViewDiff(NSArray<id<ICTableViewDiffable>> *_Nullable oldArray,
+                                           NSArray<id<ICTableViewDiffable>> * _Nullable newArray,
+                                           ICTableViewDiffOption option) {
+    return ICTableViewDiffing(NO, 0, 0, oldArray, newArray, option);
+}
+                                           
+
+ICTableViewIndexPathResult *ICTableViewDiffPath(NSInteger fromSection,
+                                                NSInteger toSection,
+                                                NSArray<id<ICTableViewDiffable>> *_Nullable oldArray,
+                                                NSArray<id<ICTableViewDiffable>> * _Nullable newArray,
+                                                ICTableViewDiffOption option) {
+    return ICTableViewDiffing(YES, fromSection, toSection, oldArray, newArray, option);
+}
+
+
+ICTableViewIndexSetResult *ICTableViewDiffExperiment( NSArray<id<ICTableViewDiffable>> *_Nullable oldArray,
                                                      NSArray<id<ICTableViewDiffable>> * _Nullable newArray,
                                                      ICTableViewDiffOption option) {
-    return ICTableViewDiffing(NO, 0, 0, oldArraty, newArray, option);
+    return ICTableViewDiffing(NO, 0, 0, oldArray, newArray, option);
 
 }
+                                                     
+
+ICTableViewIndexPathResult *ICTableViewDiffPathExperiment(NSInteger fromSection,
+                                                          NSInteger toSection,
+                                                          NSArray<id<ICTableViewDiffable>> *_Nullable oldArray,
+                                                          NSArray<id<ICTableViewDiffable>> * _Nullable newArray,
+                                                          ICTableViewDiffOption option) {
+    return ICTableViewDiffing(YES, fromSection, toSection, oldArray, newArray, option);
+}
+                                                          
+
 
 
 

@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol ICTableViewDiffable;
 
-typedef void (^IGListUpdatingCompletion)(BOOL finished);
+typedef void (^ICTableViewUpdatingCompletion)(BOOL finished);
+typedef void (^ICTableViewObjectTransitionBlock)(NSArray *toObjects);
 
 
 @protocol ICTableViewUpdatingDelagate <NSObject>
@@ -18,6 +22,9 @@ typedef void (^IGListUpdatingCompletion)(BOOL finished);
                             fromObjects:(nullable NSArray<id <ICTableViewDiffable>> *)fromObjects
                               toObjects:(nullable NSArray<id <ICTableViewDiffable>> *)toObjects
                                animated:(BOOL)animated
-                             completion:(nullable IGListUpdatingCompletion)completion;
+                  objectTransitionBlock:(ICTableViewObjectTransitionBlock)objectTransitionBlock
+                             completion:(nullable ICTableViewUpdatingCompletion)completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

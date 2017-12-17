@@ -12,23 +12,30 @@
 @interface ICTableViewUpdater()
 @property (nonatomic, copy, nullable) NSArray *fromObjects;
 @property (nonatomic, copy, nullable) NSArray *toObjects;
+@property (nonatomic, copy) ICTableViewObjectTransitionBlock objectTransitionBlock;
+
 
 @end
 
 @implementation ICTableViewUpdater
 
-
 - (void)performUpdateWithTableView:(UITableView *)tableView
                        fromObjects:(NSArray<id<ICTableViewDiffable>> *)fromObjects
                          toObjects:(NSArray<id<ICTableViewDiffable>> *)toObjects
                           animated:(BOOL)animated
-                        completion:(IGListUpdatingCompletion)completion {
+            objectTransitionBlock:(ICTableViewObjectTransitionBlock)objectTransitionBlock
+                        completion:(ICTableViewUpdatingCompletion)completion {
+    
     self.fromObjects = fromObjects;
     self.toObjects = toObjects;
-    
+    self.objectTransitionBlock = objectTransitionBlock;
     //执行更新
     void (^executeUpdateBlocks)(void) = ^{
         
+        //执行更新操作之前，首先更新数据
+        if (objectTransitionBlock) {
+            objectTransitionBlock(toObjects);
+        }
     };
     
     //批量执行完成block
@@ -44,7 +51,7 @@
     };
     
     ICTableViewIndexSetResult *(^performDiff)(void) = ^ICTableViewIndexSetResult * {
-        return ICTableViewDiffExperiment(fromObjects, toObjects);
+        return ICTableViewDiffExperiment(fromObjects, toObjects, ICTableViewDiffEquality);
     };
     
     //批量更新操作
