@@ -8,16 +8,25 @@
 
 #import "ICTableViewUpdater.h"
 #import "ICTableViewIndexSetResult.h"
+#import "ICTableViewBatchUpdateData.h"
+#import "ICTableViewBatchUpdates.h"
+#import "UITableView+ICTableViewBatchUpdateData.h"
 #import "ICTableViewDiff.h"
 @interface ICTableViewUpdater()
 @property (nonatomic, copy, nullable) NSArray *fromObjects;
 @property (nonatomic, copy, nullable) NSArray *toObjects;
 @property (nonatomic, copy) ICTableViewObjectTransitionBlock objectTransitionBlock;
+@property (nonatomic, strong, nullable) ICTableViewBatchUpdateData *applyingUpdateData;
 
+@property (nonatomic, strong) ICTableViewBatchUpdates *batchUpdates;
 
 @end
 
 @implementation ICTableViewUpdater
+
+- (void)cleanStateAfterUpdates {
+    self.batchUpdates = [ICTableViewBatchUpdates new];
+}
 
 - (void)performUpdateWithTableView:(UITableView *)tableView
                        fromObjects:(NSArray<id<ICTableViewDiffable>> *)fromObjects
@@ -58,6 +67,9 @@
     void (^batchUpdatesBlock)(ICTableViewIndexSetResult *result) = ^(ICTableViewIndexSetResult *result){
         executeUpdateBlocks();
         
+        self.applyingUpdateData = [self flushTableView:tableView withDiffResult:result batchUpdates:self.batchUpdates fromObjects:fromObjects];
+        
+        [self cleanStateAfterUpdates];
        
     };
 
@@ -78,7 +90,7 @@
                 reloadDataFallback();
             }else if (animated) {
                 [tableView performBatchUpdates:^{
-                    
+                    batchUpdatesBlock(result);
                 } completion:batchUpdatesCompletionBlock];
             }else {
                 [CATransaction begin];
@@ -102,6 +114,50 @@
     
     performUpdate(result);
     
+}
+
+- (ICTableViewBatchUpdateData *)flushTableView:(UITableView *)tableView
+                                     withDiffResult:(ICTableViewIndexSetResult *)diffResult
+                                       batchUpdates:(ICTableViewBatchUpdates *)batchUpdates
+                                        fromObjects:(NSArray <id<ICTableViewDiffable>> *)fromObjects {
+    
+    // combine section reloads from the diff and manual reloads via reloadItems:
+    NSMutableIndexSet *reloads = [diffResult.updates mutableCopy];
+//    [reloads addIndexes:batchUpdates.sectionReloads];
+    
+    NSMutableIndexSet *inserts = [diffResult.inserts mutableCopy];
+    NSMutableIndexSet *deletes = [diffResult.deletes mutableCopy];
+//    if (self.movesAsDeletesInserts) {
+//        for (IGListMoveIndex *move in moves) {
+//            [deletes addIndex:move.from];
+//            [inserts addIndex:move.to];
+//        }
+//        // clear out all moves
+//        moves = [NSSet new];
+//    }
+    
+    // reloadSections: is unsafe to use within performBatchUpdates:, so instead convert all reloads into deletes+inserts
+//    convertReloadToDeleteInsert(reloads, deletes, inserts, diffResult, fromObjects);
+    
+    NSMutableArray<NSIndexPath *> *itemInserts = batchUpdates.itemInserts;
+    NSMutableArray<NSIndexPath *> *itemDeletes = batchUpdates.itemDeletes;
+//    NSMutableArray<IGListMoveIndexPath *> *itemMoves = batchUpdates.itemMoves;
+    
+    NSSet<NSIndexPath *> *uniqueDeletes = [NSSet setWithArray:itemDeletes];
+    NSMutableSet<NSIndexPath *> *reloadDeletePaths = [NSMutableSet new];
+    NSMutableSet<NSIndexPath *> *reloadInsertPaths = [NSMutableSet new];
+//    for (IGListReloadIndexPath *reload in batchUpdates.itemReloads) {
+//        if (![uniqueDeletes containsObject:reload.fromIndexPath]) {
+//            [reloadDeletePaths addObject:reload.fromIndexPath];
+//            [reloadInsertPaths addObject:reload.toIndexPath];
+//        }
+//    }
+    [itemDeletes addObjectsFromArray:[reloadDeletePaths allObjects]];
+    [itemInserts addObjectsFromArray:[reloadInsertPaths allObjects]];
+    
+    ICTableViewBatchUpdateData *updateData = [[ICTableViewBatchUpdateData alloc] initWithInsertSections:inserts deleteSections:deletes insertIndexPaths:itemInserts deleteIndexPaths:itemDeletes];
+    [tableView ic_applyBatchUpdateData:updateData];
+    return updateData;
 }
 
 @end

@@ -50,6 +50,7 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
         NSMapTable *table = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsStrongMemory capacity:0];
         _sectionMap = [[ICTableViewSectionMap alloc] initWithMapTable:table];
         _viewController = viewController;
+        _updater = updater;
     }
     return self;
 }
@@ -57,6 +58,14 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
 - (nullable ICTableViewSectionController *)sectionControllerForSection:(NSInteger)section
 {
     return [self.sectionMap sectionControllerForSection:section];
+}
+
+- (NSInteger)sectionForSectionController:(ICTableViewSectionController *)sectionController {
+    return [self.sectionMap sectionForSectionController:sectionController];
+}
+
+- (nullable id)objectForSection:(NSInteger)section {
+    return [self.sectionMap objectForSection:section];
 }
 
 - (void)updateObjects:(NSArray *)objects dataSource:(id<ICTableViewAdapterDataSource>)dataSource
@@ -84,9 +93,6 @@ NS_INLINE NSString *ICTableViewReusableViewIdentifier(Class viewClass, NSString 
         
         sectionController.tableViewContext = self;
         sectionController.viewController = self.viewController;
-        
-        [sectionControllers addObject:sectionController];
-        [validObjects addObject:object];
         
         // in case the section controller was created outside of -listAdapter:sectionControllerForObject:
 //        sectionController.collectionContext = self;

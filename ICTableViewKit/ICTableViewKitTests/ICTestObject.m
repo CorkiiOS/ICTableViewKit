@@ -16,6 +16,7 @@
 
 - (BOOL)isEqualToDiffableObject:(id<ICTableViewDiffable>)object {
     ICTestObject *o = object;
+    NSLog(@"%@  %@", o.name, self.name);
     if ([object isKindOfClass:[ICTestObject class]]) {
         return [self.name isEqualToString:o.name];
     }

@@ -36,6 +36,10 @@ typedef void (^IGTableViewUpdaterCompletion)(BOOL finished);
 
 - (nullable ICTableViewSectionController *)sectionControllerForSection:(NSInteger)section;
 
+- (NSInteger)sectionForSectionController:(ICTableViewSectionController *)sectionController;
+
+- (nullable id)objectForSection:(NSInteger)section;
+
 - (void)performUpdatesAnimated:(BOOL)animated completion:(nullable IGTableViewUpdaterCompletion)completion;
 
 

@@ -62,6 +62,7 @@
     return [self.objectToSectionControllerMap objectForKey:object];
 }
 
+
 - (NSInteger)sectionForSectionController:(ICTableViewSectionController *)sectionController {
     NSNumber *index = [self.sectionControllerToSectionMap objectForKey:sectionController];
     return index != nil ? [index integerValue] : NSNotFound;
@@ -72,13 +73,13 @@
     [self reset];
     
     self.mObjects = [objects mutableCopy];
-
+    __weak typeof(self) weakSelf = self;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
         ICTableViewSectionController *sectionController = sectionControllers[idx];
         
         // set the index of the list for easy reverse lookup
-        [self.sectionControllerToSectionMap setObject:@(idx) forKey:sectionController];
-        [self.objectToSectionControllerMap setObject:sectionController forKey:object];
+        [weakSelf.sectionControllerToSectionMap setObject:@(idx) forKey:sectionController];
+        [weakSelf.objectToSectionControllerMap setObject:sectionController forKey:object];
     }];
 }
 

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0415FA341FE7890D00458134 /* ICTableViewBatchUpdateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415FA331FE7890D00458134 /* ICTableViewBatchUpdateData.m */; };
+		0415FA371FE78AA900458134 /* ICTableViewBatchUpdates.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415FA361FE78AA900458134 /* ICTableViewBatchUpdates.m */; };
+		0415FA3D1FE7925A00458134 /* UITableView+ICTableViewBatchUpdateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415FA3C1FE7925A00458134 /* UITableView+ICTableViewBatchUpdateData.m */; };
+		0415FA401FE799B600458134 /* EmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415FA3F1FE799B600458134 /* EmptyViewController.m */; };
+		0415FA431FE79A1400458134 /* EmptySectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415FA421FE79A1400458134 /* EmptySectionController.m */; };
+		0415FA471FE79A3100458134 /* ICEmptyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415FA451FE79A3100458134 /* ICEmptyTableViewCell.m */; };
+		0415FA481FE79A3100458134 /* ICEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0415FA461FE79A3100458134 /* ICEmptyTableViewCell.xib */; };
+		0415FA491FE7B7F000458134 /* ICTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EB92FD1FE2B8D6006ADD1A /* ICTestObject.m */; };
 		04B4DEC51FD7CCE100E9144B /* ICHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4DEC41FD7CCE100E9144B /* ICHeaderFooterView.m */; };
 		04B4DEC71FD7CCF300E9144B /* ICHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4DEC61FD7CCF300E9144B /* ICHeaderFooterView.xib */; };
 		04D67F451FE21B5800A46DBF /* ICTableViewUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D67F441FE21B5800A46DBF /* ICTableViewUpdater.m */; };
@@ -50,6 +58,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0415FA321FE7890D00458134 /* ICTableViewBatchUpdateData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewBatchUpdateData.h; sourceTree = "<group>"; };
+		0415FA331FE7890D00458134 /* ICTableViewBatchUpdateData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTableViewBatchUpdateData.m; sourceTree = "<group>"; };
+		0415FA351FE78AA900458134 /* ICTableViewBatchUpdates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewBatchUpdates.h; sourceTree = "<group>"; };
+		0415FA361FE78AA900458134 /* ICTableViewBatchUpdates.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICTableViewBatchUpdates.m; sourceTree = "<group>"; };
+		0415FA3B1FE7925A00458134 /* UITableView+ICTableViewBatchUpdateData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+ICTableViewBatchUpdateData.h"; sourceTree = "<group>"; };
+		0415FA3C1FE7925A00458134 /* UITableView+ICTableViewBatchUpdateData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableView+ICTableViewBatchUpdateData.m"; sourceTree = "<group>"; };
+		0415FA3E1FE799B600458134 /* EmptyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyViewController.h; sourceTree = "<group>"; };
+		0415FA3F1FE799B600458134 /* EmptyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyViewController.m; sourceTree = "<group>"; };
+		0415FA411FE79A1400458134 /* EmptySectionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptySectionController.h; sourceTree = "<group>"; };
+		0415FA421FE79A1400458134 /* EmptySectionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptySectionController.m; sourceTree = "<group>"; };
+		0415FA441FE79A3100458134 /* ICEmptyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICEmptyTableViewCell.h; sourceTree = "<group>"; };
+		0415FA451FE79A3100458134 /* ICEmptyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICEmptyTableViewCell.m; sourceTree = "<group>"; };
+		0415FA461FE79A3100458134 /* ICEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ICEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		04B4DEC21FD7BD3D00E9144B /* ICTableViewContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICTableViewContext.h; sourceTree = "<group>"; };
 		04B4DEC31FD7CCE100E9144B /* ICHeaderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICHeaderFooterView.h; sourceTree = "<group>"; };
 		04B4DEC41FD7CCE100E9144B /* ICHeaderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICHeaderFooterView.m; sourceTree = "<group>"; };
@@ -152,6 +173,13 @@
 				48D7EDA21FD6C9B0008BC2D8 /* AppDelegate.m */,
 				48D7EDA41FD6C9B0008BC2D8 /* ViewController.h */,
 				48D7EDA51FD6C9B0008BC2D8 /* ViewController.m */,
+				0415FA3E1FE799B600458134 /* EmptyViewController.h */,
+				0415FA3F1FE799B600458134 /* EmptyViewController.m */,
+				0415FA411FE79A1400458134 /* EmptySectionController.h */,
+				0415FA421FE79A1400458134 /* EmptySectionController.m */,
+				0415FA441FE79A3100458134 /* ICEmptyTableViewCell.h */,
+				0415FA451FE79A3100458134 /* ICEmptyTableViewCell.m */,
+				0415FA461FE79A3100458134 /* ICEmptyTableViewCell.xib */,
 				48D7EDE11FD6D2E5008BC2D8 /* NormalSectionController.h */,
 				48D7EDE21FD6D2E5008BC2D8 /* NormalSectionController.m */,
 				04B4DEC31FD7CCE100E9144B /* ICHeaderFooterView.h */,
@@ -205,6 +233,10 @@
 				04D67F471FE21F0C00A46DBF /* ICTableViewDiffable.h */,
 				04D67F431FE21B5800A46DBF /* ICTableViewUpdater.h */,
 				04D67F441FE21B5800A46DBF /* ICTableViewUpdater.m */,
+				0415FA321FE7890D00458134 /* ICTableViewBatchUpdateData.h */,
+				0415FA331FE7890D00458134 /* ICTableViewBatchUpdateData.m */,
+				0415FA351FE78AA900458134 /* ICTableViewBatchUpdates.h */,
+				0415FA361FE78AA900458134 /* ICTableViewBatchUpdates.m */,
 				04D67F481FE2293900A46DBF /* ICTableViewIndexSetResult.h */,
 				04D67F491FE2293900A46DBF /* ICTableViewIndexSetResult.m */,
 				48B417441FE4FCCB00ED9733 /* ICTableViewIndexPathResult.h */,
@@ -213,6 +245,8 @@
 				04D67F4C1FE22B9C00A46DBF /* ICTableViewDiff.mm */,
 				48EB92EF1FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.h */,
 				48EB92F01FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.m */,
+				0415FA3B1FE7925A00458134 /* UITableView+ICTableViewBatchUpdateData.h */,
+				0415FA3C1FE7925A00458134 /* UITableView+ICTableViewBatchUpdateData.m */,
 				48EB92F21FE29E89006ADD1A /* NSString+ICTableViewDiffable.h */,
 				48EB92F31FE29E89006ADD1A /* NSString+ICTableViewDiffable.m */,
 			);
@@ -329,6 +363,7 @@
 				48D7EDAB1FD6C9B0008BC2D8 /* Assets.xcassets in Resources */,
 				04B4DEC71FD7CCF300E9144B /* ICHeaderFooterView.xib in Resources */,
 				48D7EDA91FD6C9B0008BC2D8 /* Main.storyboard in Resources */,
+				0415FA481FE79A3100458134 /* ICEmptyTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,11 +388,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0415FA491FE7B7F000458134 /* ICTestObject.m in Sources */,
 				48D7EDD81FD6CA59008BC2D8 /* ICTableViewAdapter+UITableView.m in Sources */,
 				48D7EDA61FD6C9B0008BC2D8 /* ViewController.m in Sources */,
 				48D7EDDB1FD6CB32008BC2D8 /* ICTableViewSectionMap.m in Sources */,
+				0415FA431FE79A1400458134 /* EmptySectionController.m in Sources */,
 				04D67F451FE21B5800A46DBF /* ICTableViewUpdater.m in Sources */,
+				0415FA3D1FE7925A00458134 /* UITableView+ICTableViewBatchUpdateData.m in Sources */,
 				04D67F4D1FE22B9C00A46DBF /* ICTableViewDiff.mm in Sources */,
+				0415FA401FE799B600458134 /* EmptyViewController.m in Sources */,
+				0415FA341FE7890D00458134 /* ICTableViewBatchUpdateData.m in Sources */,
 				48D7EDDE1FD6CE1C008BC2D8 /* ICTableViewSectionController.m in Sources */,
 				48D7EDB11FD6C9B0008BC2D8 /* main.m in Sources */,
 				48B417461FE4FCCB00ED9733 /* ICTableViewIndexPathResult.m in Sources */,
@@ -368,6 +408,8 @@
 				48EB92F11FE29E6D006ADD1A /* NSNumber+ICTableViewDiffable.m in Sources */,
 				48D7EDD51FD6C9D3008BC2D8 /* ICTableViewAdapter.m in Sources */,
 				04B4DEC51FD7CCE100E9144B /* ICHeaderFooterView.m in Sources */,
+				0415FA371FE78AA900458134 /* ICTableViewBatchUpdates.m in Sources */,
+				0415FA471FE79A3100458134 /* ICEmptyTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 //
 
 #import "NormalSectionController.h"
-
+#import "EmptyViewController.h"
 @implementation NormalSectionController
 
 - (NSInteger)numberOfRows
@@ -53,7 +53,7 @@
 - (void)didSelectItemAtIndex:(NSInteger)index {
     
     NSLog(@"%ld",index);
-    [self.viewController.navigationController pushViewController:[UIViewController new] animated:YES];
+    [self.viewController.navigationController pushViewController:[EmptyViewController new] animated:YES];
     
 }
 
