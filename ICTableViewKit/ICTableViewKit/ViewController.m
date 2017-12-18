@@ -45,7 +45,7 @@
 
 - (nonnull NSArray *)objectsForListAdapter:(nonnull ICTableViewAdapter *)listAdapter
 {
-    return @[@1];
+    return @[@1,@2];
 }
 
 @end

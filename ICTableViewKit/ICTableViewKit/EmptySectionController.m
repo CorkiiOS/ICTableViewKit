@@ -28,13 +28,6 @@
 {
     ICEmptyTableViewCell *cell = [self.tableViewContext dequeueReusableCellOfNibName:@"ICEmptyTableViewCell" forSectionController:self atIndex:index];
     cell.indexLabel.text = [NSString stringWithFormat:@"%@",_object.name];
-    __weak typeof(self) weakSelf = self;
-    cell.removeCallBack = ^{
-        if (self.removeIndex) {
-            self.removeIndex(weakSelf);
-        }
-    };
-    
     return cell;
 }
 
@@ -43,7 +36,9 @@
 }
 
 - (void)didSelectItemAtIndex:(NSInteger)index {
-    
+    if (self.removeIndex) {
+        self.removeIndex(self);
+    }
 }
 
 @end

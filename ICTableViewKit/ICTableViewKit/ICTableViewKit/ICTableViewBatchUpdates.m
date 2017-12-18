@@ -21,4 +21,10 @@
     return self;
 }
 
+- (BOOL)hasChanges {
+    return (self.sectionReloads.count > 0 ||
+            self.itemInserts.count > 0 ||
+            self.itemDeletes.count > 0 );
+    
+}
 @end

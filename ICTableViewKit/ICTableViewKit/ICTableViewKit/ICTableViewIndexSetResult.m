@@ -8,7 +8,11 @@
 
 #import "ICTableViewIndexSetResult.h"
 
-@implementation ICTableViewIndexSetResult
+@implementation ICTableViewIndexSetResult {
+    NSMapTable<id<NSObject>, NSNumber *> *_oldIndexMap;
+    NSMapTable<id<NSObject>, NSNumber *> *_newIndexMap;
+
+}
 
 - (instancetype)initWithInserts:(NSIndexSet *)inserts
                         deletes:(NSIndexSet *)deletes
@@ -19,6 +23,8 @@
         _inserts = [inserts copy];
         _deletes = [deletes copy];
         _updates = [updates copy];
+        _oldIndexMap = oldIndexMap;
+        _newIndexMap = newIndexMap;
     }
     return self;
 }
@@ -31,5 +37,14 @@
     return self.inserts.count + self.deletes.count + self.updates.count;
 }
 
+- (NSInteger)oldIndexForIdentifier:(id<NSObject>)identifier {
+    NSNumber *index = [_oldIndexMap objectForKey:identifier];
+    return index == nil ? NSNotFound : [index integerValue];
+}
+
+- (NSInteger)newIndexForIdentifier:(id<NSObject>)identifier {
+    NSNumber *index = [_newIndexMap objectForKey:identifier];
+    return index == nil ? NSNotFound : [index integerValue];
+}
 
 @end

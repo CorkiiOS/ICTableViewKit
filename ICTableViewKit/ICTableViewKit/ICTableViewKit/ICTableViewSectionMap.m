@@ -37,8 +37,7 @@
     return self;
 }
 
-- (NSArray *)objects
-{
+- (NSArray *)objects {
     return self.mObjects.copy;
 }
 
@@ -71,12 +70,10 @@
 - (void)updateWithObjects:(NSArray *)objects sectionControllers:(NSArray *)sectionControllers {
     
     [self reset];
-    
     self.mObjects = [objects mutableCopy];
     __weak typeof(self) weakSelf = self;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
         ICTableViewSectionController *sectionController = sectionControllers[idx];
-        
         // set the index of the list for easy reverse lookup
         [weakSelf.sectionControllerToSectionMap setObject:@(idx) forKey:sectionController];
         [weakSelf.objectToSectionControllerMap setObject:sectionController forKey:object];

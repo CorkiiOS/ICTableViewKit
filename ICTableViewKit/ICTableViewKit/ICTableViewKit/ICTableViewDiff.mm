@@ -102,7 +102,7 @@ static id ICTableViewDiffing(BOOL returnIndexPaths,
                     
                 case ICTableViewDiffEquality:
                 {
-                    if (![n isEqualToDiffableObject:o]) {
+                    if (n != o && ![n isEqualToDiffableObject:o]) {
                         entry->updated = YES;
                     }
                 }

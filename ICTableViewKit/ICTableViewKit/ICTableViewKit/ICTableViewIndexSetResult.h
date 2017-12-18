@@ -11,12 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ICTableViewIndexSetResult : NSObject
 
-- (instancetype)initWithInserts:(NSIndexSet *)inserts
-                        deletes:(NSIndexSet *)deletes
-                        updates:(NSIndexSet *)updates
-                    oldIndexMap:(NSMapTable<id<NSObject>, NSNumber *> *)oldIndexMap
-                    newIndexMap:(NSMapTable<id<NSObject>, NSNumber *> *)newIndexMap;
-
 @property (nonatomic, strong, readonly) NSIndexSet *inserts;
 
 @property (nonatomic, strong, readonly) NSIndexSet *deletes;
@@ -27,7 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) NSInteger changeCount;
 
+- (instancetype)initWithInserts:(NSIndexSet *)inserts
+                        deletes:(NSIndexSet *)deletes
+                        updates:(NSIndexSet *)updates
+                    oldIndexMap:(NSMapTable<id<NSObject>, NSNumber *> *)oldIndexMap
+                    newIndexMap:(NSMapTable<id<NSObject>, NSNumber *> *)newIndexMap NS_DESIGNATED_INITIALIZER;
 
+- (NSInteger)oldIndexForIdentifier:(id<NSObject>)identifier;
+
+- (NSInteger)newIndexForIdentifier:(id<NSObject>)identifier;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)new NS_UNAVAILABLE;

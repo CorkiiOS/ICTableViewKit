@@ -34,7 +34,7 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        for (NSInteger i = 0; i < 15; i ++) {
+        for (NSInteger i = 0; i < 2; i ++) {
             ICTestObject *object = [ICTestObject new];
             object.key = i;
             object.name = [NSString stringWithFormat:@"%zd 王大大", i + 1];
@@ -66,12 +66,17 @@
 {
     __weak typeof(self) weakSelf = self;
 
+    static int i = 0;
     EmptySectionController *empty = [EmptySectionController new];
     empty.removeIndex = ^(EmptySectionController *emptySection) {
-        
-        ICTestObject *object = [weakSelf.adapter objectForSection:[weakSelf.adapter sectionForSectionController:emptySection]];
-        object.name = @"change da";
+        NSInteger index = [weakSelf.adapter sectionForSectionController:emptySection];
+        ICTestObject *object = [weakSelf.adapter objectForSection:index];
+        ICTestObject *newobject = [ICTestObject new];
+        newobject.key = object.key;
+        newobject.name = [NSString stringWithFormat:@"change da ===%d", i];
+        [weakSelf.data replaceObjectAtIndex:index withObject:newobject];
         [weakSelf.adapter performUpdatesAnimated:YES completion:nil];
+        i++;
     };
     return empty;
 }

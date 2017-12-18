@@ -46,12 +46,10 @@
 }
 
 - (void)didUpdateToObject:(id)object {
-    
     NSLog(@"%@", object);
 }
 
 - (void)didSelectItemAtIndex:(NSInteger)index {
-    
     NSLog(@"%ld",index);
     [self.viewController.navigationController pushViewController:[EmptyViewController new] animated:YES];
     

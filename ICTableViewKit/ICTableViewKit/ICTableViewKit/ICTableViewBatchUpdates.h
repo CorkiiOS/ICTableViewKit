@@ -17,4 +17,6 @@
 @property (nonatomic, strong, readonly) NSMutableArray<void (^)()> *itemUpdateBlocks;
 @property (nonatomic, strong, readonly) NSMutableArray<void (^)(BOOL)> *itemCompletionBlocks;
 
+- (BOOL)hasChanges;
+
 @end

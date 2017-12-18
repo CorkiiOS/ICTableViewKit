@@ -35,12 +35,14 @@
             objectTransitionBlock:(ICTableViewObjectTransitionBlock)objectTransitionBlock
                         completion:(ICTableViewUpdatingCompletion)completion {
     
+    if (tableView == nil) {
+        return;
+    }
     self.fromObjects = fromObjects;
     self.toObjects = toObjects;
     self.objectTransitionBlock = objectTransitionBlock;
     //执行更新
     void (^executeUpdateBlocks)(void) = ^{
-        
         //执行更新操作之前，首先更新数据
         if (objectTransitionBlock) {
             objectTransitionBlock(toObjects);
@@ -84,7 +86,6 @@
     void (^performUpdate)(ICTableViewIndexSetResult *) = ^(ICTableViewIndexSetResult *result) {
         
         @try {
-            //将要执行更新操作
             //改变的数量过大 执行回退操作 少条件
             if (result.changeCount > 100) {
                 reloadDataFallback();
@@ -116,6 +117,31 @@
     
 }
 
+void convertReloadToDeleteInsert(NSMutableIndexSet *reloads,
+                                 NSMutableIndexSet *deletes,
+                                 NSMutableIndexSet *inserts,
+                                 ICTableViewIndexSetResult *result,
+                                 NSArray<id<ICTableViewDiffable>> *fromObjects) {
+    //reloadSection 不安全，转换成删除 + 插入
+    const BOOL hasObjects = [fromObjects count] > 0;
+    //-[_NSCachedIndexSet enumerateObjectsUsingBlock:]: unrecognized selector sent to instance 0x604000036c00'
+    [[reloads copy] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        id<NSObject> diffIdentifier = hasObjects ? [fromObjects[idx] diffIdentifier] : nil;
+        const NSInteger from = hasObjects ? [result oldIndexForIdentifier:diffIdentifier] : idx;
+        const NSInteger to = hasObjects ? [result newIndexForIdentifier:diffIdentifier] : idx;
+        [reloads removeIndex:from];
+        
+        if (from != NSNotFound && to != NSNotFound) {
+            [deletes addIndex:from];
+            [inserts addIndex:to];
+        }else {
+            //异常处理
+        }
+        
+    }];
+}
+
 - (ICTableViewBatchUpdateData *)flushTableView:(UITableView *)tableView
                                      withDiffResult:(ICTableViewIndexSetResult *)diffResult
                                        batchUpdates:(ICTableViewBatchUpdates *)batchUpdates
@@ -137,7 +163,7 @@
 //    }
     
     // reloadSections: is unsafe to use within performBatchUpdates:, so instead convert all reloads into deletes+inserts
-//    convertReloadToDeleteInsert(reloads, deletes, inserts, diffResult, fromObjects);
+    convertReloadToDeleteInsert(reloads, deletes, inserts, diffResult, fromObjects);
     
     NSMutableArray<NSIndexPath *> *itemInserts = batchUpdates.itemInserts;
     NSMutableArray<NSIndexPath *> *itemDeletes = batchUpdates.itemDeletes;
